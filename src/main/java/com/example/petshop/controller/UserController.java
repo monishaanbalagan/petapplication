@@ -1,5 +1,7 @@
 package com.example.petshop.controller;
 
+
+
 import javax.validation.Valid;
 
 import org.apache.commons.logging.Log;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.petshop.dto.LoginRequestDto;
+import com.example.petshop.exception.InvalidCredentialsException;
 import com.example.petshop.service.UserService;
 
 
@@ -19,15 +22,15 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	@PostMapping("/users/login")
-	public String authenticateUser(@Valid @RequestBody LoginRequestDto loginRequestDto) throws InvalidCredentialsException {
-		logger.info("authenticating the user");
-		boolean isExists;
-		isExists = userService.authenticateUser(loginRequestDto.getUserName(), loginRequestDto.getPassword());
-		if (isExists)
-			return "logged in successfully";
-		else {
-			return "Credentials are incorrect";
-		}
-	}
+    public String authenticateUser(@Valid @RequestBody LoginRequestDto loginDto) throws InvalidCredentialsException {
+        logger.info("authenticating the user");
+        boolean isExists;
+        isExists = userService.authenticateUser(loginDto.getUserName(), loginDto.getPassword());
+        if (isExists)
+            return "logged in successfully";
+        else {
+            return "Credentials are incorrect";
+        }
+    }
 
 }
