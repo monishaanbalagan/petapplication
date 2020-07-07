@@ -16,6 +16,10 @@ public class PetController {
 	@Autowired
 	PetService petService;
 
+	/**
+	 * @param petName
+	 * @return
+	 */
 	@GetMapping("/pet")
 	public ResponseEntity<PetListResponseDto> searchPets(@RequestParam("petName") String petName) {
 

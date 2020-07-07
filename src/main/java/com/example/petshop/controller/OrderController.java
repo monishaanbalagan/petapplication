@@ -17,20 +17,29 @@ import com.example.petshop.service.OrderService;
 public class OrderController {
 	@Autowired
 	OrderService orderService;
+	/**
+	 * @param userId
+	 * @param orderRequestDto
+	 * @return
+	 */
 	@PostMapping("/users/{userId}/orders")
 	public ResponseEntity<OrderResponseDto> orderPets(@PathVariable("userId")int userId,OrderRequestDto orderRequestDto) {
 
 		OrderResponseDto orderResponseDto = orderService.orderPetsByPetId(userId,orderRequestDto.getPetId());
 
-		return new ResponseEntity<OrderResponseDto>(orderResponseDto, HttpStatus.OK);
+		return new ResponseEntity<>(orderResponseDto, HttpStatus.OK);
 
 	}
+	/**
+	 * @param userId
+	 * @return 
+	 */
 	@PostMapping("/users/{userId}/ordersList")
 	public ResponseEntity<OrdersDetailsListResponseDto> getOrdersList(@PathVariable("userId")int userId) {
 
 		OrdersDetailsListResponseDto ordersListDetails = orderService.getOrdersListByUserId(userId);
 
-		return new ResponseEntity<OrdersDetailsListResponseDto>(ordersListDetails, HttpStatus.OK);
+		return new ResponseEntity<>(ordersListDetails, HttpStatus.OK);
 
 	}
 

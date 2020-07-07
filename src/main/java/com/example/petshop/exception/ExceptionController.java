@@ -20,7 +20,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
 		errorResponse.setStatusCode(HttpStatus.UNAUTHORIZED.value());
 		errorResponse.setStatusMessage(invalidCredentialsException.getMessage());
 		
-		return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 
 	}
 
@@ -31,7 +31,7 @@ public class ExceptionController extends ResponseEntityExceptionHandler {
         String allErrors = ex.getBindingResult().getFieldErrors().stream().
                 map(e->e.getDefaultMessage()).collect(Collectors.joining(","));
         errorResponse.setStatusMessage(allErrors);
-         return new ResponseEntity<Object>(errorResponse, HttpStatus.BAD_REQUEST);
+         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 	 }
 
 }
